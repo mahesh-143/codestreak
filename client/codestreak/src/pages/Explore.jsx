@@ -1,6 +1,14 @@
 import React from "react";
 import { OtherUser } from "../components/OtherUser";
+import { users } from "../UserData";
 
 export const Explore = () => {
-  return <OtherUser />;
+
+  const userDetails = users.map((user) => {
+    return <OtherUser key={user.id} {...user} />
+  })
+
+  return(
+     <>{userDetails}</>
+    )
 };
