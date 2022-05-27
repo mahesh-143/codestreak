@@ -17,7 +17,6 @@ function App() {
   return (
     <>
     <ThemeProvider theme={theme}>
-      {console.log(props => props.theme.color.nav)}
     <Navbar />
     <Routes>
     <Route path="/explore" element={<Explore />}/>
