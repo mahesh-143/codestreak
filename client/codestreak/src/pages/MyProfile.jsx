@@ -1,9 +1,12 @@
 import React from 'react'
+import { UserProfile } from '../components/UserProfile'
+import { Post } from '../components/Post'
 
 export const MyProfile = () => {
   return (
     <>
-    <h1>My Profile</h1>
+      <UserProfile />
+      <Post />
     </>
   )
 }

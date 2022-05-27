@@ -1,7 +1,6 @@
-import React from 'react'
+import React from "react";
+import { OtherUser } from "../components/OtherUser";
 
 export const Explore = () => {
-  return (
-    <h1>Explore</h1>
-  )
-}
+  return <OtherUser />;
+};
