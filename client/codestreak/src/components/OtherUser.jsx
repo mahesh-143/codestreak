@@ -5,11 +5,11 @@ import { Streak } from "./styles/Streak.styled";
 
 export const OtherUser = (props) => {
   return (
+    
     <OtherUserStyles>
-      <h1>{props.username}</h1>
-      <p>{props.goalstatement}</p>
-      <Streak>🔥{props.streakcount}</Streak>
-
+      <h1>{props.name}</h1>
+      <p>{props.description}</p>
+      <Streak>🔥{props.streak}</Streak> 
     </OtherUserStyles>
   );
 };
