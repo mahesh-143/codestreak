@@ -12,19 +12,27 @@ export const Explore = () => {
   const url = "http://127.0.0.1:5000/api/users";
 
   const getAllUsers = () => {
-    axios
-      .get(url)
+    axios.get(url)
       .then((response) => {
         const allUsers = response.data.users;
         console.log(allUsers);
         getUsers(allUsers);
       })
       .catch((error) => console.error(`Error: ${error}`));
-  };
+  }
 
-  const userDetails = users.map((user) => {
+  if(users.length > 0) {
+  const userDetails = users.map(user => {
     return <OtherUser key={user.id} {...user} />;
   });
 
-  return <>{userDetails}</>;
+  return <>
+  {console.log(users)}
+  {userDetails}
+  </>;
+  }
+  else {
+    return (<h1>Please wait while users are loading...</h1>)
+  }
+  
 };
