@@ -3,6 +3,7 @@ import { Navbar } from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import { Explore } from "./pages/Explore";
 import { MyProfile } from "./pages/MyProfile";
+import { Container } from "./components/styles/Container.styled";
 
 function App() {
   const theme = { 
@@ -18,10 +19,12 @@ function App() {
     <>
     <ThemeProvider theme={theme}>
     <Navbar />
+    <Container>
     <Routes>
     <Route path="/explore" element={<Explore />}/>
     <Route path="/" element={<MyProfile />}/>
     </Routes>
+    </Container>
     </ThemeProvider>
     </>
   );

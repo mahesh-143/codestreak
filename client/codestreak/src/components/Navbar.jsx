@@ -1,10 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Nav, NavParent } from "./styles/Navbar.styled";
+import { Header, Nav, NavParent } from "./styles/Navbar.styled";
+import { Container } from "./styles/Container.styled";
 
 export const Navbar = () => {
   return (
-    <NavParent>
+    
+    <Header>
+      <Container>
+        <NavParent>
         <Nav>
           <ul>
             <li>
@@ -44,7 +48,10 @@ export const Navbar = () => {
               </Link>
             </li>
           </ul>
-        </Nav>
-    </NavParent>
+        </Nav> 
+        </NavParent>
+        </Container>
+        </Header>
+
   );
 };

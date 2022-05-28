@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+export const Header = styled.header`
+@media (min-width: 700px) {
+    width : 100vw;
+    height : 5em;
+    background : ${props => props.theme.color.nav};
+  }
+`;
+
 export const NavParent = styled.div`
     width : 100%;
     display : flex;
