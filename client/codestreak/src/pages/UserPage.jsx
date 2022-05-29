@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { Post } from "../components/Post";
 import {Streak} from "../components/styles/Streak.styled";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export const UserPage = () => {
@@ -15,7 +16,7 @@ export const UserPage = () => {
 
 
   const url = `http://127.0.0.1:5000/api/u/`;
-  const id = "6290c1b05ad59aece13b3882";
+  let { id } = useParams();
 
 
   const getUser = () => {
