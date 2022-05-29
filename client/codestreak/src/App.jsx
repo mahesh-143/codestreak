@@ -5,6 +5,8 @@ import { Explore } from "./pages/Explore";
 import { MyProfile } from "./pages/MyProfile";
 import { Container } from "./components/styles/Container.styled";
 import { UserPage } from "./pages/UserPage";
+import { Signin } from "./pages/Signin";
+import { Signup } from "./pages/Signup";
 
 function App() {
   const theme = { 
@@ -25,6 +27,8 @@ function App() {
     <Route path="/explore" element={<Explore />}/>
     <Route path="/" element={<MyProfile />}/>
     <Route path="/user/:id" element={<UserPage />}/>
+    <Route path="/signin" element={<Signin />}/>
+    <Route path="/signup" element={<Signup />}/>
     </Routes>
     </Container>
     </ThemeProvider>

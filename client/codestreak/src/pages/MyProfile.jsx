@@ -2,8 +2,11 @@ import React from 'react'
 import { UserProfile } from '../components/UserProfile'
 import { Post } from '../components/Post'
 import {posts} from '../UserPosts'
+import { Signin } from './Signin'
 
 export const MyProfile = () => {
+
+  let loggedIn = false
 
   const postDetails = posts.map(post => {
     return <Post 
@@ -11,10 +14,15 @@ export const MyProfile = () => {
     {...post} />
   })
 
-  return (
-    <>
-      <UserProfile />
-      {postDetails}
-    </>
-  )
+  if(loggedIn){
+    return (
+      <>
+        <UserProfile />
+        {postDetails}
+      </>
+    )
+  } else {
+    return <Signin />
+  }
+
 }
