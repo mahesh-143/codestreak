@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { Explore } from "./pages/Explore";
 import { MyProfile } from "./pages/MyProfile";
 import { Container } from "./components/styles/Container.styled";
+import { UserPage } from "./pages/UserPage";
 
 function App() {
   const theme = { 
@@ -23,6 +24,7 @@ function App() {
     <Routes>
     <Route path="/explore" element={<Explore />}/>
     <Route path="/" element={<MyProfile />}/>
+    <Route path="/user/:id" element={<UserPage />}/>
     </Routes>
     </Container>
     </ThemeProvider>
