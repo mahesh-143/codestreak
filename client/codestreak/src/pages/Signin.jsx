@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { Button } from "../components/styles/Button.styled" 
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 export const Signin = () => {
 
     const [user, setUser] = useState("")
+
+    const url = `http://127.0.0.1:5000/api/auth/login`;
 
     const handleChange= (e) => {
         const name = e.target.name
@@ -14,8 +17,21 @@ export const Signin = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-       
+        try {
+            const response = await axios.post(url,
+                JSON.stringify({...user}),
+                {
+                    headers : {'Content-Type' : 'application/json'}
+                }
+                )
+                console.log(response.data)
+                const accessToken = response.data.token
+                console.log(accessToken)
+        } catch (error) {
+            console.log(`Error : ${error}`)
+        }
     }
+
   return (
     <>
     <h1>Sign In</h1>

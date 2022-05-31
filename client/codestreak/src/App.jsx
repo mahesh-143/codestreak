@@ -24,11 +24,16 @@ function App() {
     <Navbar />
     <Container>
     <Routes>
-    <Route path="/explore" element={<Explore />}/>
+    
+    {/* protected route */}
     <Route path="/" element={<MyProfile />}/>
+
+     {/* public routes */}
+    <Route path="/explore" element={<Explore />}/>
     <Route path="/user/:id" element={<UserPage />}/>
     <Route path="/signin" element={<Signin />}/>
     <Route path="/signup" element={<Signup />}/>
+
     </Routes>
     </Container>
     </ThemeProvider>
