@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Button } from "../components/styles/Button.styled"
 import  { Link } from "react-router-dom"
-import axios from 'axios'
+import axios from "../api/axios"
 
 export const Signup = () => {
 
     const [user, setUser] = useState("")
 
-    const url = `http://127.0.0.1:5000/api/auth/signup`;
+    const url = `/auth/signup`;
 
     const handleChange= (e) => {
         const name = e.target.name

@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Button } from "../components/styles/Button.styled" 
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import axios from "../api/axios"
 
 export const Signin = () => {
 
     const [user, setUser] = useState("")
 
-    const url = `http://127.0.0.1:5000/api/auth/login`;
+    const url = "/auth/login";
 
     const handleChange= (e) => {
         const name = e.target.name
@@ -55,10 +55,9 @@ export const Signin = () => {
 
         <Button type="submit">Sign in</Button>
 
-        Don't have an Account?
-        <Link to="/signup">Sign Up</Link>
-
     </form>
+    Don't have an Account?
+    <Link to="/signup">Sign Up</Link>
     </>
   )
 }

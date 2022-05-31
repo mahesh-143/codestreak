@@ -2,20 +2,19 @@ import { React, useState, useEffect } from "react";
 import { Post } from "../components/Post";
 import {Streak} from "../components/styles/Streak.styled";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import axios from "../api/axios";
 
 export const UserPage = () => {
   const [posts, getPosts] = useState("");
   const [user, setUser] = useState("");
 
   useEffect(() => {
-    getAllPosts();
     getUser();
-    // eslint-disable-next-line
+    getAllPosts();
   }, []);
 
 
-  const url = `http://127.0.0.1:5000/api/u/`;
+  const url = `/u/`;
   let { id } = useParams();
 
 

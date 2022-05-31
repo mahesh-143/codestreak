@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { OtherUser } from "../components/OtherUser";
-import axios from "axios";
+import axios from "../api/axios";
 
 export const Explore = () => {
   const [users, getUsers] = useState("");
@@ -9,13 +9,13 @@ export const Explore = () => {
     getAllUsers();
   }, []);
 
-  const url = "http://127.0.0.1:5000/api/users";
+  const url = "/users";
 
   const getAllUsers = () => {
     axios.get(url)
       .then((response) => {
         const allUsers = response.data.users;
-        console.log(allUsers);
+        console.log("getAllUsers function ran");
         getUsers(allUsers);
       })
       .catch((error) => console.error(`Error: ${error}`));
@@ -27,7 +27,7 @@ export const Explore = () => {
   });
 
   return <>
-  {console.log(users)}
+  {console.log("explore rendered")}
   {userDetails}
   </>;
   }
