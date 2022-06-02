@@ -6,7 +6,7 @@ import { Signin } from './Signin'
 
 export const MyProfile = () => {
 
-  let loggedIn = false
+  let loggedIn = true
 
   const postDetails = posts.map(post => {
     return <Post 

@@ -5,9 +5,9 @@ export const Post = (props) => {
   
   return (
     <PostStyle>
-      <h1>{props.dayCount} / 100</h1>
+      <span>{props.dayCount || 74} / 100</span>
       <p>
-        {props.body}
+        {props.body || "Lorem ipsum dolor sit amit consecuter"}
       </p>
     </PostStyle>
   );

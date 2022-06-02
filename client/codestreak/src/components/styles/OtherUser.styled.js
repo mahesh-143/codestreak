@@ -13,9 +13,8 @@ export const OtherUserStyles = styled.div`
   margin: 1rem auto;
 
     img{
-      width : 50px;
-      height : 50px;
-      border-radius : 50%;
+      width : 4.2em;
+      clip-path : circle();
     }
 
     a{
