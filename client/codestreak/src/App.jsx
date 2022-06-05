@@ -17,7 +17,7 @@ function App() {
         primary : '#000000'
       }
   }
-
+  
   return (
     <>
     <ThemeProvider theme={theme}>
@@ -26,9 +26,10 @@ function App() {
     <Routes>
     
     {/* protected route */}
-    <Route path="/" element={<MyProfile />}/>
+    <Route path="/myprofile" element={<MyProfile />}/>
 
      {/* public routes */}
+    <Route path="/" element={<Explore />}/>
     <Route path="/explore" element={<Explore />}/>
     <Route path="/user/:id" element={<UserPage />}/>
     <Route path="/signin" element={<Signin />}/>

@@ -12,7 +12,7 @@ export const Navbar = () => {
         <Nav>
           <ul>
             <li>
-              <Link to="/">
+              <Link to="/myprofile">
                 <span>My Profile</span>
                 <svg
                   width="98"

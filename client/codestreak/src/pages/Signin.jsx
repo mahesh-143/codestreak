@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { Button } from "../components/styles/Button.styled" 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import axios from "../api/axios"
 
 export const Signin = () => {
 
     const [user, setUser] = useState("")
+    const navigate = useNavigate()
 
     const url = "/auth/login";
 
@@ -25,8 +26,10 @@ export const Signin = () => {
                 }
                 )
                 console.log(response.data)
-                const accessToken = response.data.token
+                const accessToken = response.data.user.token
                 console.log(accessToken)
+                localStorage.setItem("accessToken", accessToken)
+                navigate("/myprofile")
         } catch (error) {
             console.log(`Error : ${error}`)
         }
@@ -35,7 +38,7 @@ export const Signin = () => {
   return (
     <>
     <h1>Sign In</h1>
-    <form onClick={handleSubmit}>
+    <form onSubmit={handleSubmit}>
         <label htmlFor="email">email</label>
         <input
             type="email"

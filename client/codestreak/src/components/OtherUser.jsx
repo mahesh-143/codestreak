@@ -17,7 +17,6 @@ export const OtherUser = (props) => {
       <Streak>🔥{props.streak}</Streak> 
       <p>{props.description}</p>
       
-      
     </OtherUserStyles>
   );
 };
