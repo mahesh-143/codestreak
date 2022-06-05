@@ -44,52 +44,58 @@ router.post('/auth/login', async (req, res, next) => {
         next(error)
     }
 })
-router.get('/auth/:id/:token', async (req, res, next)=>{
+router.get('/auth/:id/:token', async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id)
-        if(!user) throw new BaseError()
-        const decoded = jwt.verify(req.params.token, process.env.JWT_SECRET+user.password)
-        if(decoded.id != user._id) throw new BaseError()
+        if (!user) throw new BaseError()
+        const decoded = jwt.verify(req.params.token, process.env.JWT_SECRET + user.password)
+        if (decoded.id != user._id) throw new BaseError()
         user.verified = true
         const updatedUser = await user.save()
-        const {password, __v,updatedAt, createdAt, ...restUser} = updatedUser._doc
-        const token = jwt.sign({...restUser}, process.env.JWT_SECRET)
-        res.status(200).json({message: 'User verified', user: {...restUser, token}})
+        const { password, __v, updatedAt, createdAt, ...restUser } = updatedUser._doc
+        const token = jwt.sign({ ...restUser }, process.env.JWT_SECRET)
+        res.status(200).json({ message: 'User verified', user: { ...restUser, token } })
     } catch (error) {
         next(error)
     }
 })
-
+router.get('/u/all', async (req, res) => {
+    try {
+        const users = await User.find({}, "name streak description profile")
+        res.status(200).json({ users })
+    } catch (error) {
+        next(error)
+    }
+})
 router.get('/u/:id', async (req, res, next) => {
     try {
-        const user = await User.findById(req.params.id)
-        if(!user) throw new BaseError(404, 'No user found')
-        const {password, __v, role, verified, createdAt,updatedAt, ... restUser} = user._doc 
-        return res.status(200).json({user: restUser})
+        const user = await User.findById(req.params.id, "name streak description profile")
+        if (!user) throw new BaseError(404, 'No user found')
+        return res.status(200).json({ user })
     } catch (error) {
         next(error)
     }
 })
 router.patch('/u/:id', checkUser, async (req, res, next) => {
     try {
-        const user  = await User.findById(req.params.id)
-        if(!user) throw new BaseError(404, "Not found")
-        if(!user._id === res.locals.user._id) throw new BaseError(403, 'Unauthorized')
-        user.description = req.body.description||user.description
-        user.name = req.body.name||user.name
-        user.profile = req.body.profile||user.profile
+        const user = await User.findById(req.params.id)
+        if (!user) throw new BaseError(404, "Not found")
+        if (!user._id === res.locals.user._id) throw new BaseError(403, 'Unauthorized')
+        user.description = req.body.description || user.description
+        user.name = req.body.name || user.name
+        user.profile = req.body.profile || user.profile
         const updatedUser = await user.save()
-        const {password, __v, role, verified, createdAt,updatedAt, ... restUser} = updatedUser._doc 
-        return res.status(200).json({message: 'User updated', user: restUser})
+        const { password, __v, role, verified, createdAt, updatedAt, ...restUser } = updatedUser._doc
+        return res.status(200).json({ message: 'User updated', user: restUser })
     } catch (error) {
         next(error)
     }
 })
 router.get('/u/:id/posts', async (req, res, next) => {
     try {
-        const user = await User.findById(req.params.id).populate('posts')
-        if(!user) throw new BaseError(404, 'No user found')
-        return res.status(200).json({posts: user.posts})
+        const user = await User.findById(req.params.id, "posts").populate('posts')
+        if (!user) throw new BaseError(404, 'No user found')
+        return res.status(200).json({ posts: user.posts })
     } catch (error) {
         next(error)
     }
@@ -97,40 +103,68 @@ router.get('/u/:id/posts', async (req, res, next) => {
 router.post('/post', checkUser, async (req, res, next) => {
     try {
         const user = await User.findById(res.locals.user._id).populate('posts')
-        const lastPost = user.posts[user.posts.length-1]
-        const expiresIn = new Date(new Date(lastPost.createdAt).getTime() + 60 * 60 * 24 * 1000)
-        const newPost = new Post({
-            body: req.body.body,
-            author: res.locals.user._id
-        })
-        if(expiresIn>Date.now()){
-            //increase streak
+        const lastPost = user.posts[user.posts.length - 1]
+        if (!user.posts.length) {
+            const newPost = new Post({
+                body: req.body.body,
+                author: res.locals.user._id,
+                challenge: 1
+            })
             user.streak++
-        }else{
-            //decrese streak
-            user.streak = 0
+            user.posts.push(newPost)
+            const savedUser = await user.save()
+            const post = await newPost.save()
+            const { password, __v, role, verified, createdAt, updatedAt, ...restUser } = user._doc
+            return res.status(200).json({ message: 'Post created', post, user: restUser })
         }
-        user.posts.push(newPost)
-        const savedUser = await user.save()
-        const post = await newPost.save()
-        const {password, __v, role, verified, createdAt,updatedAt, ... restUser} = user._doc 
-        return res.status(200).json({ message: 'Post created', post, user: restUser })
+        const expiresIn = new Date(new Date(lastPost.createdAt).getTime() + 60 * 60 * 24 * 1000)
+        const availiableIn = new Date(new Date(lastPost.createdAt).getTime() + 60 * 60 * 24 * 1000)
+        const now = new Date()
+        const isStreakReset = now > expiresIn
+        const canPost = now > availiableIn
+        if (!canPost) throw new BaseError(403, 'You cant make more than 1 post in 24 hours')
+        if (isStreakReset) {
+            const streakResetPost = new Post({
+                isSpecialPost: true,
+                challenge: lastPost.challenge
+            })
+            user.streak = 1
+            streakResetPost.save()
+            const challengeNumber = lastPost.challenge
+            const newPost = new Post({
+                body: req.body.body,
+                author: res.locals.user._id,
+                challenge: challengeNumber + 1
+            })
+            user.posts.push(streakResetPost)
+            user.posts.push(newPost)
+            const savedUser = await user.save()
+            const post = await newPost.save()
+            const { password, __v, role, verified, createdAt, updatedAt, ...restUser } = user._doc
+            return res.status(200).json({ message: 'Streak resetted', post, user: restUser })
+
+        } else {
+            const newPost = new Post({
+                body: req.body.body,
+                author: res.locals.user._id,
+                challenge: lastPost.challenge || 1
+            })
+            user.streak++
+            user.posts.push(newPost)
+            const savedUser = await user.save()
+            const post = await newPost.save()
+            const { password, __v, role, verified, createdAt, updatedAt, ...restUser } = user._doc
+            return res.status(200).json({ message: 'Post created', post, user: restUser })
+        }
     } catch (error) {
         next(error)
     }
 
 })
-router.get('/delete', async(req,res)=>{
-    
+router.get('/delete', async (req, res) => {
+
     await User.deleteMany()
     res.send('ok')
 })
-router.get('/users', async(req,res)=>{
-    try {
-        const users = await User.find()
-        res.status(200).json({users})
-    } catch (error) {
-        next(error)
-    }
-})
+
 module.exports = router
