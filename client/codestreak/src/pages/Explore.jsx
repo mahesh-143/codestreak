@@ -9,7 +9,7 @@ export const Explore = () => {
     getAllUsers();
   }, []);
 
-  const url = "/users";
+  const url = "/u/all";
 
   const getAllUsers = () => {
     axios.get(url)

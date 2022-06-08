@@ -28,7 +28,7 @@ export const Signup = () => {
             
         }
         catch(error){
-            console.log(`Error : ${error}`)
+            console.error(`Error : ${error}`)
         }
     }
   return (

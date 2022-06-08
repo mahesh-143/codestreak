@@ -7,6 +7,7 @@ import { Container } from "./components/styles/Container.styled";
 import { UserPage } from "./pages/UserPage";
 import { Signin } from "./pages/Signin";
 import { Signup } from "./pages/Signup";
+import { MakePost } from "./pages/MakePost";
 
 function App() {
   const theme = { 
@@ -27,6 +28,7 @@ function App() {
     
     {/* protected route */}
     <Route path="/myprofile" element={<MyProfile />}/>
+    <Route path="/makepost" element={<MakePost />}/>
 
      {/* public routes */}
     <Route path="/" element={<Explore />}/>

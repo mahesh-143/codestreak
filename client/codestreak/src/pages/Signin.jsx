@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Button } from "../components/styles/Button.styled" 
 import { Link, useNavigate} from 'react-router-dom'
 import axios from "../api/axios"
