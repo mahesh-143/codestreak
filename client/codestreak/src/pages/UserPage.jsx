@@ -3,7 +3,8 @@ import { Post } from "../components/Post";
 import {Streak} from "../components/styles/Streak.styled";
 import { useParams } from "react-router-dom";
 import axios from "../api/axios";
-import {Profile} from "../components/styles/UserProfile.styled"
+import {AvatarContainer, Profile} from "../components/styles/UserProfile.styled"
+import Avatar from "react-avatar";
 
 export const UserPage = () => {
   const [posts, getPosts] = useState("");
@@ -43,16 +44,18 @@ export const UserPage = () => {
   let dayCount = posts.length+1;
   const postList = posts.slice(0).reverse().map(post => {
     dayCount--
-    return <Post key={post.id} dayCount={dayCount} {...post} />;
+    return <Post key={post._id} dayCount={dayCount} {...post} />;
   });
 
   return ( 
         <>
         <Profile>
-          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2980&q=80" alt="user avatar" />
+         <AvatarContainer>
+         <Avatar src="" name={user.name} alt="user" size="120" />
+         </AvatarContainer>
         <h1>{user.name}</h1> 
-        <p>{user.description}</p>
-        <div>
+        <p>{user.description || "Hey there! I am using codestreak"}</p>
+        <div> 
         <Streak>🔥{user.streak}</Streak>
         </div>
         </Profile>

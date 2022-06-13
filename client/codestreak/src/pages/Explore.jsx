@@ -23,7 +23,7 @@ export const Explore = () => {
 
   if(users.length > 0) {
   const userDetails = users.map(user => {
-    return <OtherUser key={user.id} {...user} />;
+    return <OtherUser key={user._id} {...user} />;
   });
 
   return <>

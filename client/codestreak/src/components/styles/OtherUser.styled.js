@@ -12,11 +12,6 @@ export const OtherUserStyles = styled.div`
   align-items : center;
   margin: 1rem auto;
 
-    img{
-      width : 4.2em;
-      clip-path : circle();
-    }
-
     a{
       font-weight : 500;
       font-size : 1rem;

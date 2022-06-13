@@ -27,8 +27,10 @@ export const Signin = () => {
                 )
                 console.log(response.data)
                 const accessToken = response.data.user.token
+                const id = response.data.user._id
                 console.log(accessToken)
                 localStorage.setItem("accessToken", accessToken)
+                localStorage.setItem("id" , id)
                 navigate("/myprofile")
         } catch (error) {
             console.log(`Error : ${error}`)
