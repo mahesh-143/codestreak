@@ -24,9 +24,8 @@ export const MakePost = () => {
       return navigate("/signin")
   }
   const handleChange = (e) => {
-    const name = e.target.name
     const value = e.target.value
-    setPost((values) => ({...values, [name]: value}))
+    setPost(value)
   }
 
   const handleSubmit = async (e) =>{
@@ -34,7 +33,7 @@ export const MakePost = () => {
     try { 
       console.log(post)
       const response = await axios.post(url, 
-        JSON.stringify({...post}),
+        JSON.stringify({body:post}),
         {
           headers : { 'Content-Type' : 'application/json',
         "Authorization" : `Bearer ${token}`}
@@ -51,7 +50,7 @@ export const MakePost = () => {
     <div>
         <form onSubmit={handleSubmit}>
             <label htmlFor="post">Write a post</label>
-            <input type="text" name="post" id="post" value={post.body} onChange={handleChange}/>
+            <input type="text" name="body" id="post" value={post.body} onChange={handleChange}/>
             <Button>Post</Button>
         </form>
     </div>

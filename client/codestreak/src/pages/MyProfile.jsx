@@ -52,10 +52,7 @@ export const MyProfile = () => {
   if(posts.length > 0) {
   let dayCount = posts.length+1;
   const postList = posts.slice(0).reverse().map(post => {
-    (post.isSpecialPost) ?
-    dayCount = 0
-    : 
-    dayCount--
+   dayCount--
     return <Post key={post._id} dayCount={dayCount} {...post} />;
   });
 
