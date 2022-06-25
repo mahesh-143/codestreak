@@ -39,9 +39,11 @@ export const MakePost = () => {
         "Authorization" : `Bearer ${token}`}
         })
         console.log(response)
+        navigate("/myprofile")
     }
     catch(error){
       console.error(`Error : ${error}`)
+      setPost("")
     }
   }
 

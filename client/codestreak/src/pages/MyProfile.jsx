@@ -52,8 +52,7 @@ export const MyProfile = () => {
   if(posts.length > 0) {
   let dayCount = posts.length+1;
   const postList = posts.slice(0).reverse().map(post => {
-   dayCount--
-    return <Post key={post._id} dayCount={dayCount} {...post} />;
+    return <Post key={post._id} dayCount={post.day} {...post} />;
   });
 
   
