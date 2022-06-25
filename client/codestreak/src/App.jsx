@@ -8,6 +8,7 @@ import { UserPage } from "./pages/UserPage";
 import { Signin } from "./pages/Signin";
 import { Signup } from "./pages/Signup";
 import { MakePost } from "./pages/MakePost";
+import { Verification } from "./pages/Verification";
 
 function App() {
   const theme = { 
@@ -29,6 +30,7 @@ function App() {
     {/* protected route */}
     <Route path="/myprofile" element={<MyProfile />}/>
     <Route path="/makepost" element={<MakePost />}/>
+    <Route path="/api/auth/:id/:token" element={<Verification />}/>
 
      {/* public routes */}
     <Route path="/" element={<Explore />}/>
