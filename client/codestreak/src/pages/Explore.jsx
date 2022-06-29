@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { OtherUser } from "../components/OtherUser";
+import { UserCard } from "../components/UserCard";
 import axios from "../api/axios";
 
 export const Explore = () => {
@@ -23,7 +23,7 @@ export const Explore = () => {
 
   if(users.length > 0) {
   const userDetails = users.map(user => {
-    return <OtherUser key={user._id} {...user} />;
+    return <UserCard key={user._id} {...user} />;
   });
 
   return <>

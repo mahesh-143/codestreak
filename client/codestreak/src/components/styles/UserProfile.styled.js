@@ -30,7 +30,7 @@ div{
     justify-items : left;
     text-align : left;
     margin-inline: auto;
-    max-width: 45em;
+    // max-width: 45em;
 
 }
 `;

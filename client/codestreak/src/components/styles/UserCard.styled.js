@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-export const OtherUserStyles = styled.div`
+export const UserCardStyles = styled.div`
   background: ${(props) => props.theme.color.card};
-  max-width : 40em;
+  // max-width : 40em;
   padding : 1em;
   margin : 1rem;
   border-radius : 0.625em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   display : grid;
   gap : 1em;
   grid-template-columns: repeat(3, 1fr);

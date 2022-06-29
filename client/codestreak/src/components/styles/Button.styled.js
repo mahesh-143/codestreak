@@ -5,8 +5,7 @@ export const Button = styled.button`
     background : ${props => props.theme.color.btn};
     color : #fff;
     border : 1px solid #000;
-    box-shadow : 4px 4px 0px #000;
-    border-radius : 10px;
+    border-radius : 0.3125em;
     cursor : pointer;
 
     &:hover{

@@ -1,17 +1,26 @@
 import styled from "styled-components";
 
-export const Header = styled.header`
-@media (min-width: 700px) {
-    width : 100vw;
-    height : 5em;
-    background : ${props => props.theme.color.nav};
-  }
-`;
-
 export const NavParent = styled.div`
     width : 100%;
     display : flex;
+    align-items : center;
     justify-content : center;
+
+    h1{
+        font-size : 1.3rem;
+        font-weight : 500;
+        padding : 0.5rem 0;
+
+        span{
+            color : green;
+        }
+    }
+
+    @media (min-width: 700px){
+        h1{
+            padding : 0;
+        }
+    }
 `;
 
 export const Nav = styled.nav`
@@ -20,10 +29,11 @@ export const Nav = styled.nav`
     width : 14em;
     height : 3.25em;
     margin-bottom : 1em;
-    background : ${props => props.theme.color.nav};
+    background : #000;
     border-radius : 0.625em;
     display : flex;
     justify-content : center;
+    align-items : center;
 
     ul{
        display : flex;
@@ -38,6 +48,9 @@ export const Nav = styled.nav`
 
        a{
            text-decoration : none;
+           display : flex;
+           align-items : center;
+           gap : 0.5rem;
            color : ${props => props.theme.color.primary};
 
            &:hover{
@@ -48,15 +61,19 @@ export const Nav = styled.nav`
        svg{
          width : 2em;
          height : auto;
+         path{
+        fill : #fff;
+         }
        }
     }
 
     @media (min-width: 700px) {
         position : static;
         width : 100%;
+        margin : auto;
         height : 5em;
         border-radius : 0;
-        justify-content : start;
+        background : #fff;
 
         ul{
             gap : 4.5em;
@@ -67,7 +84,9 @@ export const Nav = styled.nav`
             }
      
             svg{
-              display : none;
+              path{
+                fill : #000;
+              }
             }
          }
       }

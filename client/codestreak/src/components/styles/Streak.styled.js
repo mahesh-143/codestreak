@@ -5,8 +5,7 @@ export const Streak = styled.div`
     padding : 0.5em;
     background : #fff;
     border : 1px solid #000;
-    box-shadow : 4px 4px 0px #000;
-    border-radius : 0.625em;
+    border-radius : 0.3125em;
     text-align : center;
     justify-self : right;
 `;

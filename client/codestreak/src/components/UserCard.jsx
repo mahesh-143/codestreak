@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { OtherUserStyles, UserInfo } from "./styles/OtherUser.styled";
+import { UserCardStyles, UserInfo } from "./styles/UserCard.styled";
 import { Streak } from "./styles/Streak.styled";
 import Avatar from "react-avatar";
 
 
-export const OtherUser = (props) => {
+export const UserCard = (props) => {
 
   return (
     
-    <OtherUserStyles>
+    <UserCardStyles>
       <UserInfo>
       <Avatar src={props.profile} name={props.name} alt="user" size="70" round={true}/>
       <Link to={"/user/"+props._id}>
@@ -19,6 +19,6 @@ export const OtherUser = (props) => {
       <Streak>🔥{props.streak}</Streak> 
       <p>{props.description  || "hey there I am using codestreak"}</p>
       
-    </OtherUserStyles>
+    </UserCardStyles>
   );
 };
